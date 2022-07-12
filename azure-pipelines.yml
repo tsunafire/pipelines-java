@@ -20,8 +20,10 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: AzurePowerShell@5
-   inputs:
-     ScriptType: 'InlineScript'
-     Inline: '"TLS 1.2 readiness check:"; (Invoke-WebRequest -Uri status.dev.azure.com -UseBasicParsing).StatusDescription'
-     FailOnStandardError: true
+    
+steps:
+  - task: AzurePowerShell@5
+    inputs:
+      ScriptType: 'InlineScript'
+      Inline: '"TLS 1.2 readiness check:"; (Invoke-WebRequest -Uri status.dev.azure.com -UseBasicParsing).StatusDescription'
+      FailOnStandardError: true
